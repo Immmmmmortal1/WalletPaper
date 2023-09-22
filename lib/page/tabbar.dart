@@ -59,8 +59,6 @@ class _MyTabbarState extends State<MyTabbar> with SingleTickerProviderStateMixin
       ],
     );
   }
- 
-
 }
 
 enum _MyTabViews {

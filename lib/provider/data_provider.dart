@@ -39,7 +39,14 @@ class DataProvider with ChangeNotifier {
       if (categoryR.statusCode == HttpStatus.ok) {
         final List<dynamic> categoryArr = categoryR.data['data'];
         categories = categoryArr.map((e) => CategoryModel.fromJson(e)).toList();
-        String jsonString = jsonEncode(categoryR.data['data']);
+        CategoryModel allModel = CategoryModel();
+        allModel.id = '0';
+        allModel.name = '全部';
+        allModel.orderNum = '0';
+        allModel.tag = '0';
+        categories.insert(0, allModel);
+
+        String jsonString = jsonEncode(categories);
         SharedPreferences.getInstance().then((value) {
           value.setString('categories', jsonString);
         });
@@ -52,6 +59,9 @@ class DataProvider with ChangeNotifier {
 
   Future<List<PaperItemModel>> getPaperItemModels(
       String cateId, int pageN) async {
+        if (cateId == '0') {
+          return [];
+        }
     int pageNum = pageN * 15 + 1;
     String url =
         'http://wallpaper.apc.360.cn/index.php?c=WallPaper&a=getAppsByCategory&cid=$cateId&start=$pageNum&count=15&from=360chrome';
@@ -71,6 +81,7 @@ class DataProvider with ChangeNotifier {
         final List<dynamic> paperArr = paperRespone.data['data'];
         paperItemModels =
             paperArr.map((e) => PaperItemModel.fromJson(e)).toList();
+        
         String jsonString = jsonEncode(paperArr);
         SharedPreferences.getInstance().then((value) {
           value.setString('papers$cateId', jsonString);

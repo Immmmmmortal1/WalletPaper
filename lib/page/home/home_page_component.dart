@@ -122,7 +122,8 @@ class _HomePageContentWidgetState extends State<HomePageContentWidget>
                                     )),
                               )),
                         ));
-                  })),
+                  })
+                  ),
         ));
   }
 }
