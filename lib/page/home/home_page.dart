@@ -3,6 +3,7 @@ import 'dart:ffi';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:wallet_paper_main/model/category_model.dart';
+import 'package:wallet_paper_main/page/all/all_page.dart';
 import 'package:wallet_paper_main/page/base/base_navi/custom_app_bar.dart';
 import 'package:wallet_paper_main/page/home/home_page_component.dart';
 import 'package:wallet_paper_main/provider/data_provider.dart';
@@ -44,17 +45,22 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
             ),
 
         ),
-        body:  TabBarView(
-          children: categories.map((category) => HomePageContentWidget(cateModel: category,)).toList(),
+        body: TabBarView(
+          children: _getTabBarViewWidgtes(categories),
            )
         ),
       );
   }
+
+  List<Widget> _getTabBarViewWidgtes(List<CategoryModel> categories) {
+    List<Widget> tabwidgets = [];
+    for (var index = 0; index < categories.length; index++) {
+      if (index == 0) {
+        tabwidgets.add(AllPage(categories: categories));
+      }else {
+        tabwidgets.add(HomePageContentWidget(cateModel: categories[index]));
+      }
+    }
+    return tabwidgets;
+  }
 }
-// IndexedStack(
-//         index: _currentIndex, // 当前选中的标签索引
-//         children: categories.map((category) => HomePageContentWidget(cateModel: category)).toList(),
-//       ),
-      // TabBarView(
-      //     children: categories.map((category) => HomePageContentWidget(cateModel: category,)).toList(),
-      //   )
