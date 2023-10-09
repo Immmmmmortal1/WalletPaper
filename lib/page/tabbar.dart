@@ -53,7 +53,7 @@ class _MyTabbarState extends State<MyTabbar> with SingleTickerProviderStateMixin
     return TabBarView(
       physics: const NeverScrollableScrollPhysics(),
       controller: _tabController,
-      children: const [
+      children:  [
         HomePage(),
         MinePage()
       ],

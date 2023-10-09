@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:image_gallery_saver/image_gallery_saver.dart';
 
 class HomePageBig extends StatelessWidget {
   const HomePageBig({Key? key, required this.tag, required this.bigimageurl})
        : super(key: key);
   final String tag;
   final String bigimageurl;
-
+  
+  
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +19,8 @@ class HomePageBig extends StatelessWidget {
             onTap: () {
               Navigator.pop(context);
             },
-            child: Stack(children: [
+            child: Stack(
+              children: [
               loadingWidget(true),
               SizedBox(
                 width: MediaQuery.of(context).size.width,
@@ -37,6 +40,26 @@ class HomePageBig extends StatelessWidget {
                   ),
                 ),
               ),
+              Positioned(
+                bottom: 40,
+                right: 32,
+                child: Container(
+                  height: 60,
+                  width: 60,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(60),
+                    color: Colors.black,
+                  ),
+                  child: IconButton(
+                  onPressed: () {
+ 
+                  },
+                  icon: const Icon(
+                    Icons.save,
+                    color: Colors.white,
+                  )
+                ),
+                ))
             ])));
   }
 

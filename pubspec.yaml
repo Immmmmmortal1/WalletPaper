@@ -15,6 +15,7 @@ dependencies:
   dio: ^5.3.1
   shared_preferences: ^2.2.0
   flutter_easyrefresh: ^2.2.2
+  image_gallery_saver: ^2.0.2
 
 dev_dependencies:
   flutter_test:

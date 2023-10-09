@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:wallet_paper_main/model/category_model.dart';
 import 'package:wallet_paper_main/model/paper_item_model.dart';
+import 'package:wallet_paper_main/page/home/home_page_big.dart';
 import 'package:wallet_paper_main/provider/data_provider.dart';
 import 'package:wallet_paper_main/utils/text_style.dart';
 
@@ -11,6 +12,7 @@ class AllPageComponent extends StatefulWidget {
   @override
   State<AllPageComponent> createState() => _AllPageComponentState();
 }
+
 class _AllPageComponentState extends State<AllPageComponent> {
   List<PaperItemModel> list = [];
   @override
@@ -54,7 +56,26 @@ class _AllPageComponentState extends State<AllPageComponent> {
         final item = list[index];
         return Padding(
           padding: const EdgeInsets.only(right: 25.0),
-          child: SizedBox(
+          child: InkWell(
+            onTap: (){
+               Navigator.push(
+      context,
+      PageRouteBuilder(
+        opaque: false,
+        transitionsBuilder: (context, animation, secondaryAnimation, child) {
+          return FadeTransition(
+            opacity: animation,
+            child: child,
+          );
+        },
+        pageBuilder: (BuildContext context, _, __) {
+          return HomePageBig(tag: item.id!, bigimageurl: item.img12801024!);
+           
+        },
+      ),
+    );
+            },
+            child: SizedBox(
               child: AspectRatio(
               aspectRatio: 196 / 293,
               child: Card(
@@ -70,7 +91,8 @@ class _AllPageComponentState extends State<AllPageComponent> {
                 ),
               ),
             ),
-            )
+            ),
+          )
           
         );
         },
